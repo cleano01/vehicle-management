@@ -5,7 +5,6 @@ const VehicleService = require("../../application/service/service");
 const VehicleUseCase = require("../../application/use-cases/vehicleUseCase");
 const VehicleController = require("../../presentation/controllers/vehicleController");
 const DataBaseConnection =  require('../database/dataBaseConnection');
-const VehicleModel = require('../database/model/vehicleModel')
 const container = createContainer();
 
 

@@ -20,6 +20,11 @@ function VehicleRepository({}) {
     return vehicle;
   }
 
+  async function getByLicensePlate(licensePlate) {
+    const vehicle = await Vehicle.findOne({ licensePlate: licensePlate });
+    return vehicle;
+  }
+
   async function update(id, vehicle) {
     const updatedVehicle = await Vehicle.findByIdAndUpdate(id, vehicle, {
       new: true,
@@ -38,6 +43,7 @@ function VehicleRepository({}) {
     create,
     getAll,
     getById,
+    getByLicensePlate,
     update,
     deleteById,
   };

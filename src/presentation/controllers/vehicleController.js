@@ -1,26 +1,40 @@
 function VehicleController({ vehicleUseCase }) {
 
   return {
-    async create(req, res) {     
-      console.log('controller create');     
+    async create(req, res) { 
+      const response = await vehicleUseCase.createVehicle(req.body)   
+      
+      return res.send(response);
     },
 
     async getAll(req, res) {
-      await vehicleUseCase.getAllVehicles()
-      return {}
+      const response = await vehicleUseCase.getAllVehicles()
+      
+      return res.send(response);
     },
 
     async getById(req, res) {
-      console.log('controller getById')
+      const vehicleId = req.params.id;
 
+      const response = await vehicleUseCase.getVehicleById(vehicleId)
+      
+      return res.send(response);
     },
 
-    async update(req, res) {      
-      console.log('controller getById');        
+    async update(req, res) { 
+      const vehicleId = req.params.id;
+     
+      const response = await vehicleUseCase.updateVehicle(vehicleId, req.body)
+      
+      return res.send(response);      
     },
 
     async delete(req, res) {
-      console.log('controller getById');
+      const vehicleId = req.params.id;
+     
+      const response = await vehicleUseCase.deleteVehicle(vehicleId)
+      
+      return res.send(response); 
      
     },
   };

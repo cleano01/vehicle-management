@@ -1,31 +1,34 @@
 
 function vehicleUseCase({ vehicleService }) {
   
-  async function createVehicle(data) {
-    console.log('use case createVehicle');
-    return 
+  async function createVehicle(dataVehicle) {
+    const vehicle = await vehicleService.createVehicle(dataVehicle)
+    
+    return vehicle;
   }
     
   async function getAllVehicles() {
-    await vehicleService.validateAndCreate()
-    return 
+    const vehicles = await vehicleService.getAllVehicles()
+    
+    return vehicles;
   }
 
-  async function getVehicleById (data) {
-    return 
+  async function getVehicleById (vehicleId) {
+    const vehicle = await vehicleService.getVehicleById(vehicleId);    
+    return vehicle; 
   }
    
-  async function updateVehicle(data) {
-    return;
+  async function updateVehicle(id, dataVehicle) {
+    const vehicle = await vehicleService.updateVehicle(id, dataVehicle);    
+
+    return vehicle;
   }
 
-  async function deleteVehicle(data) {
-    console.log('use case deleteVehicle');
-    return 
+  async function deleteVehicle(vehicleId) {
+    const vehicle = await vehicleService.deleteVehicle(vehicleId);    
+    
+    return vehicle;
   }
-
- 
-  
 
   return {
     createVehicle,
