@@ -8,6 +8,23 @@ function createServer(container) {
 
   app.use('/vehicles', vehicleRoutes(container));
 
+  app.use((err, req, res, next) => {
+    if (err.status !== 500) {
+      res.status(err.status).json({
+        error: {
+          message: err.message || 'Unprocessable Entity'
+        }
+      });
+    } else {
+      console.error(err.stack); 
+      res.status(500).json({
+        error: {
+          message: 'Internal Server Error'
+        }
+      });
+    }
+  });
+
   return app;
 }
 

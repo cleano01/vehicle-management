@@ -4,35 +4,58 @@ function VehicleService({ vehicleRepository }) {
     const vehicle = await vehicleRepository.getByLicensePlate(dataVehicle.licensePlate)
     
     if (vehicle) {
-      throw new Error('Vehicle with this license plate already exists.');
+      const error = new Error('Vehicle with this license plate already exists.');
+      error.status = 422;
+      throw error;
     }
-
-    return await vehicleRepository.create(dataVehicle);
   }
 
   async function getAllVehicles() {
     const vehicles = await vehicleRepository.getAll();
+     
+    if (!vehicles) {       
+      const error = new Error('Vehicle not found.'); 
+      error.status = 404;
+      throw error;
+    };
     return  vehicles;
   }
 
   async function getVehicleById(vehicleId) {
-    return await vehicleRepository.getById(vehicleId);
+    const vehicle = await vehicleRepository.getById(vehicleId);
+
+    if (!vehicle) {       
+      const error = new Error('Vehicle not found.'); 
+      error.status = 404;
+      throw error;
+    };
+    
+    return vehicle;    
   }
 
   async function updateVehicle(vehicleId, dataVehicle) {
     const vehicle = await vehicleRepository.getById(vehicleId, dataVehicle);
     
-    if (!vehicle) throw new Error('Vehicle not found.');
+    if (!vehicle) {       
+      const error = new Error('Vehicle not found.'); 
+      error.status = 404;
+      throw error;
+    };
     
-    return await vehicleRepository.update(vehicleId, dataVehicle);
+    return await vehicleRepository.update(vehicleId, dataVehicle);    
   }
 
-  async function deleteVehicle(vehicleId) {
-    const vehicle = await vehicleRepository.getById(vehicleId);
+  async function deleteVehicle(vehicleId) {   
     
-    if (!vehicle) throw new Error('Vehicle not found.');
+      const vehicle = await vehicleRepository.getById(vehicleId);
     
-    return await vehicleRepository.deleteById(vehicleId);
+      if (!vehicle) {       
+        const error = new Error('Vehicle not found.'); 
+        error.status = 404;
+        throw error;
+      };
+    
+      return await vehicleRepository.deleteById(vehicleId);     
   }
 
   return {

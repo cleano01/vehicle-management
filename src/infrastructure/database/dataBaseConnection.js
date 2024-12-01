@@ -8,7 +8,6 @@ const connectToDatabase = async () => {
         dbName: 'vehicles',
       }
     );
-    console.log('Connected to database');
     return connection;
   } catch (error) {
     console.error('Failed to connect to database:', error);
