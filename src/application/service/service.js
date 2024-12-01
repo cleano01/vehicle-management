@@ -1,5 +1,6 @@
-function VehicleService(context) {
+function VehicleService({ vehicleRepository }) {
   async function validateAndCreate() {
+    vehicleRepository.getAll()
    console.log('service.validateAndCreate')
   }
 

@@ -1,29 +1,38 @@
-function VehicleRepository() {
+const Vehicle = require('../database/model/vehicleModel');
+
+function VehicleRepository({}) {
   async function create(vehicle) {
-    console.log(' VehicleRepository create ');
-    return 
+    const newVehicle = new Vehicle(vehicle);
+
+    await newVehicle.save();
+
+    return newVehicle;
   };
 
   async function getAll() {
-    console.log(' VehicleRepository getAll ');
-    return 
+    const vehicle = await Vehicle.find({});
+
+    return vehicle
   };
 
   async function getById(id) {
-    console.log(' VehicleRepository getById ');
-    return 
-  };
+    const vehicle = await Vehicle.findById(id);
+    return vehicle;
+  }
 
   async function update(id, vehicle) {
-    console.log(' VehicleRepository update');
-    return 
+    const updatedVehicle = await Vehicle.findByIdAndUpdate(id, vehicle, {
+      new: true,
+    });
+
+    return updatedVehicle;
   };
 
   async function deleteById(id) {
-    console.log(' VehicleRepository deleteById');
-    return 
-  };
+    const deletedVehicle = await Vehicle.findByIdAndDelete(id);
 
+    return deletedVehicle;
+  };
 
   return {
     create,

@@ -7,7 +7,7 @@ function vehicleUseCase({ vehicleService }) {
   }
     
   async function getAllVehicles() {
-    console.log('use case getAllVehicles');
+    await vehicleService.validateAndCreate()
     return 
   }
 
