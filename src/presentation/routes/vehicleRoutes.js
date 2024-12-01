@@ -1,9 +1,7 @@
 const express = require('express');
 
-function vehicleRoutes(container) {
+function vehicleRoutes({ vehicleController }) {
   const router = express.Router();
-  const { vehicleRepositoryy } = container;
-  const vehicleController = require('../controllers/vehicleController')(vehicleRepositoryy);
 
   router.post('/', vehicleController.create);
   router.get('/', vehicleController.getAll);

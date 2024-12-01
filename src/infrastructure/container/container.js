@@ -1,36 +1,23 @@
-// src/infrastructure/di/container.js
-const vehicleRepository = require('../persistence/vehicleRepositor');
-//const vehicleRepository = require('../persistence/databasevehicleRepository');
-const VehicleService = require('../../application/service/service');
-const createVehicle = require('../../application/use-cases/createVehicle');
-const getAllVehicles = require('../../application/use-cases/getAllVehicles');
-const updateVehicle = require('../../application/use-cases/updateVehicle');
-const deleteVehicle = require('../../application/use-cases/deleteVehicle');
+const { createContainer, asFunction } = require("awilix");
 
-function createContainer(databaseConfig = null) {
-  //let vehicleRepositoryy;
-  /*
-  if (databaseConfig) {
-    vehicleRepositoryy = DatabasevehicleRepository(databaseConfig);
-  } else {
-    vehicleRepositoryy = FilevehicleRepositoryy();
-  }
-  */
+const VehicleRepository = require("../../infrastructure/repository/VehicleRepository");
+const VehicleService = require("../../application/service/service");
+const VehicleUseCase = require("../../application/use-cases/vehicleUseCase");
+const VehicleController = require("../../presentation/controllers/vehicleController");
 
-  const vehicleService = VehicleService(vehicleRepository);
+const container = createContainer();
 
-  const useCases = {
-    createVehicle: (data) => createVehicle({ vehicleService, data }),
-    getAllVehicles: () => getAllVehicles({ vehicleService, vehicleRepository }),
-    updateVehicle: (id, data) => updateVehicle({ vehicleService, id, data }),
-    deleteVehicle: (id) => deleteVehicle({ vehicleService, vehicleRepository, id }),
-  };
+container.register({
+  vehicleRepository: asFunction(VehicleRepository).singleton(),
+  vehicleService: asFunction(VehicleService).singleton(),
+  vehicleUseCase: asFunction(VehicleUseCase).singleton(),
+  vehicleController: asFunction(VehicleController).singleton(),
+});
 
-  return {
-    vehicleRepository,
-    vehicleService,
-    useCases,
-  };
-}
+module.exports = container;
 
-module.exports = createContainer;
+
+
+
+
+

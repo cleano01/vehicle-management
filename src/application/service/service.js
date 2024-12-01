@@ -1,12 +1,9 @@
-// src/application/services/vehicleService.js
-
-function VehicleService(vehicleRepositoryy) {
-  async function validateAndCreate(vehicle) {
-    // Validação de lógica de negócios
+function VehicleService(context) {
+  async function validateAndCreate() {
    console.log('service.validateAndCreate')
   }
 
-  async function validateAndUpdate(id, data) {
+  async function validateAndUpdate() {
       console.log('service.validateAndUpdate')    
   }
 

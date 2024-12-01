@@ -1,4 +1,4 @@
-async function getAllVehicles(vehicleRepositoryy) {
+async function getAllVehicles() {
   console.log('use case getAllVehicles')
   //return vehicleRepositoryy.findAll();
 }
