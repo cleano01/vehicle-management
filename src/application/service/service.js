@@ -8,6 +8,8 @@ function VehicleService({ vehicleRepository }) {
       error.status = 422;
       throw error;
     }
+
+    return await vehicleRepository.create(dataVehicle)
   }
 
   async function getAllVehicles() {

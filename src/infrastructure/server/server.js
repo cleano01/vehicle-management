@@ -9,7 +9,7 @@ function createServer(container) {
   app.use('/vehicles', vehicleRoutes(container));
 
   app.use((err, req, res, next) => {
-    if (err.status !== 500) {
+    if (err !== 500) {
       res.status(err.status).json({
         error: {
           message: err.message || 'Unprocessable Entity'

@@ -1,6 +1,6 @@
 const Vehicle = require('../database/model/vehicleModel');
 
-function VehicleRepository({}) {
+function VehicleRepository() {
   async function create(vehicle) {
     const newVehicle = new Vehicle(vehicle);
 
